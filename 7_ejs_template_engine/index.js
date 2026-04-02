@@ -4,6 +4,10 @@ const app = express();
 
 app.set('view engine', 'ejs');
 
+app.use(express.urlencoded({ extended: false }));
+
+app.use(express.static('public'));
+
 app.get('/', (req, res) => {
   res.send('Home Page');
 });
@@ -21,6 +25,18 @@ app.get('/about', (req, res) => {
     ],
   });
   // res.render('other');
+});
+
+app.get('/form', (req, res) => {
+  res.render('form', { message: null });
+});
+
+app.post('/submit', (req, res) => {
+  const name = req.body.myName;
+
+  const message = `Hello, ${name}, you have submitted your name.`;
+  // res.send(message);
+  res.render('form', { message });
 });
 
 app.listen(3000, () => {
