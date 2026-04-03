@@ -1,0 +1,15 @@
+<%- include('../partials/header') %>
+
+<h2>Edit Contact</h2>
+
+<form action="/edit/<%= contact._id %>?_method=PUT" method="post">
+  <input type="text" name="firstName" value="<%= contact.firstName %>" required /><br />
+  <input type="text" name="lastName" value="<%= contact.lastName %>" required /><br />
+  <input type="text" name="mobile" value="<%= contact.mobile %>" required /><br />
+  <textarea name="address">
+    <%= contact.address %>
+  </textarea
+  ><br />
+  <button type="submit">Update</button>
+</form>
+<%- include('../partials/footer') %>

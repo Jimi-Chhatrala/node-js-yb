@@ -1,0 +1,30 @@
+<%- include('../partials/header') %>
+
+<a href="/create">Add Contact</a>
+
+<table border="1">
+  <tr>
+    <th>First Name</th>
+    <th>Last Name</th>
+    <th>Mobile</th>
+    <th>Address</th>
+  </tr>
+  <% contacts.forEach(contact => { %>
+  <tr>
+    <td><%= contact.firstName %></td>
+    <td><%= contact.lastName %></td>
+    <td><%= contact.mobile %></td>
+    <td>
+      <a href="/view/<%= contact._id %>">View</a>
+      <a href="/edit/<%= contact._id %>">Edit</a>
+      <form
+        action="/delete/<%= contact._id %>?_method=DELETE"
+        method="post"
+        style="display: inline"
+      >
+        <button type="submit">Delete</button>
+      </form>
+    </td>
+  </tr>
+  <% }); %>
+</table>
