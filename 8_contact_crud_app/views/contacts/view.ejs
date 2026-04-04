@@ -1,10 +1,15 @@
 <%- include('../partials/header') %>
 
-<h2>Contact Details</h2>
+<div class="card">
+  <h2>Contact Details</h2>
 
-<p><strong>First Name:</strong><%= contact.firstName %></p>
-<p><strong>Last Name:</strong><%= contact.lastName %></p>
-<p><strong>Mobile:</strong><%= contact.mobile %></p>
-<p><strong>Address:</strong><%= contact.address %></p>
+  <p><strong>First Name:</strong> <%= contact.firstName %></p>
+  <p><strong>Last Name:</strong> <%= contact.lastName %></p>
+  <p><strong>Phone Number:</strong> <%= contact.phone %></p>
+  <p><strong>Address:</strong> <%= contact.address %></p>
+
+  <br />
+  <a href="/" class="btn btn_secondary">Back</a>
+</div>
 
 <%- include('../partials/footer') %>

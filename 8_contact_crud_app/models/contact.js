@@ -4,7 +4,7 @@ const contactSchema = new mongoose.Schema(
   {
     firstName: String,
     lastName: String,
-    mobile: String,
+    phone: String,
     address: String,
   },
   { timestamps: true }

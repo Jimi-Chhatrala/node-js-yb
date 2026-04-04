@@ -1,30 +1,38 @@
 <%- include('../partials/header') %>
 
-<a href="/create">Add Contact</a>
+<div class="card">
+  <div style="display: flex; justify-content: space-between; margin-bottom: 15px">
+    <h2>All Contacts</h2>
+    <a href="/create" class="btn btn_primary">Add Contact</a>
+  </div>
 
-<table border="1">
-  <tr>
-    <th>First Name</th>
-    <th>Last Name</th>
-    <th>Mobile</th>
-    <th>Address</th>
-  </tr>
-  <% contacts.forEach(contact => { %>
-  <tr>
-    <td><%= contact.firstName %></td>
-    <td><%= contact.lastName %></td>
-    <td><%= contact.mobile %></td>
-    <td>
-      <a href="/view/<%= contact._id %>">View</a>
-      <a href="/edit/<%= contact._id %>">Edit</a>
-      <form
-        action="/delete/<%= contact._id %>?_method=DELETE"
-        method="post"
-        style="display: inline"
-      >
-        <button type="submit">Delete</button>
-      </form>
-    </td>
-  </tr>
-  <% }); %>
-</table>
+  <table>
+    <tr>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Phone Number</th>
+      <th>Actions</th>
+    </tr>
+
+    <% contacts.forEach(contact => { %>
+    <tr>
+      <td><%= contact.firstName %></td>
+      <td><%= contact.lastName %></td>
+      <td><%= contact.phone %></td>
+      <td class="actions">
+        <a href="/view/<%= contact._id %>" class="btn btn_secondary">View</a>
+        <a href="/edit/<%= contact._id %>" class="btn btn_primary">Edit</a>
+        <form
+          action="/delete/<%= contact._id %>?_method=DELETE"
+          method="post"
+          style="display: inline"
+        >
+          <button class="btn btn_danger">Delete</button>
+        </form>
+      </td>
+    </tr>
+    <% }); %>
+  </table>
+</div>
+
+<%- include('../partials/footer.ejs') %>
