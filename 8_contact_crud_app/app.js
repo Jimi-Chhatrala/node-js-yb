@@ -1,18 +1,17 @@
 import express from 'express';
-import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
 import methodOverride from 'method-override';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import contactRoutes from './routes/contact.route.js';
+import { connectDB } from './config/database.js';
 
 const app = express();
 
+connectDB();
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-
-// MongoDB Connection
-await mongoose.connect('mongodb://127.0.0.1:27017/contactDB');
 
 // Middleware
 app.set('view engine', 'ejs');
@@ -22,6 +21,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', contactRoutes);
 
-app.listen(3000, () => {
-  console.log('Server running on http://localhost:3000');
+const PORT = process.env.PORT || 3001;
+
+app.listen(PORT, () => {
+  console.log(`Server running on http://localhost:${PORT}`);
 });

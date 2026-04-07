@@ -1,48 +1,35 @@
 import express from 'express';
-import Contact from '../models/contact.js';
+import {
+  createContact,
+  createContactPage,
+  deleteContact,
+  editContact,
+  editContactPage,
+  getAllContactsPage,
+  viewContactPage,
+} from '../controllers/contact.controller.js';
 
 const router = express.Router();
 
-
 // Display all contacts
-router.get('/', async (req, res) => {
-  const contacts = await Contact.find();
-  res.render('contacts/index', { contacts });
-});
+router.get('/', getAllContactsPage);
 
 // Create page
-router.get('/create', (req, res) => {
-  res.render('contacts/create');
-});
+router.get('/create', createContactPage);
 
 // Save contact
-router.post('/create', async (req, res) => {
-  await Contact.create(req.body);
-  res.redirect('/');
-});
+router.post('/create', createContact);
 
 // View contact
-router.get('/view/:id', async (req, res) => {
-  const contact = await Contact.findById(req.params.id);
-  res.render('contacts/view', { contact });
-});
+router.get('/view/:id', viewContactPage);
 
 // Edit page
-router.get('/edit/:id', async (req, res) => {
-  const contact = await Contact.findById(req.params.id);
-  res.render('contacts/edit', { contact });
-});
+router.get('/edit/:id', editContactPage);
 
 // Update contact
-router.put('/edit/:id', async (req, res) => {
-  await Contact.findByIdAndUpdate(req.params.id, req.body);
-  res.redirect('/');
-});
+router.put('/edit/:id', editContact);
 
 // Delete contact
-router.delete('/delete/:id', async (req, res) => {
-  await Contact.findByIdAndDelete(req.params.id);
-  res.redirect('/');
-});
+router.delete('/delete/:id', deleteContact);
 
 export default router;
