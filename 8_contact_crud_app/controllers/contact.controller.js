@@ -3,8 +3,15 @@ import { asyncHandler, validateObjectId } from '../utils/asyncHandler.js';
 import mongoose from 'mongoose';
 
 export const getAllContactsPage = asyncHandler(async (req, res) => {
-  const contacts = await Contact.find();
-  res.render('contacts/index', { contacts });
+  const page = parseInt(req.query.page) || 1;
+  const limit = 5;
+  const skip = (page - 1) * limit;
+
+  const total = await Contact.countDocuments();
+  const contacts = await Contact.find().skip(skip).limit(limit).sort({ createdAt: -1 });
+  const totalPages = Math.ceil(total / limit);
+
+  res.render('contacts/index', { contacts, currentPage: page, totalPages, total, limit });
 });
 
 export const createContactPage = (req, res) => {

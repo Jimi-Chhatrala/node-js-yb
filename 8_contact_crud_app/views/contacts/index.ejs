@@ -8,14 +8,20 @@
 
   <table>
     <tr>
+      <th>#</th>
       <th>First Name</th>
       <th>Last Name</th>
       <th>Phone Number</th>
       <th>Actions</th>
     </tr>
 
-    <% contacts.forEach(contact => { %>
+    <% if (contacts.length === 0) { %>
     <tr>
+      <td colspan="5" style="text-align: center">No contacts found</td>
+    </tr>
+    <% } else { contacts.forEach((contact, index) => { %>
+    <tr>
+      <td><%= (currentPage - 1) * limit + index + 1 %></td>
       <td><%= contact.firstName %></td>
       <td><%= contact.lastName %></td>
       <td><%= contact.phone %></td>
@@ -31,8 +37,33 @@
         </form>
       </td>
     </tr>
-    <% }); %>
+    <% }); } %>
   </table>
+
+  <% if (totalPages > 1) { %>
+  <!-- Pagination -->
+  <div class="pagination">
+    <!-- Previous -->
+    <a href="?page=<%= currentPage - 1 %>" class="btn <%= currentPage === 1 ? 'disabled' : '' %>">
+      Previous
+    </a>
+
+    <!-- Page Numbers -->
+    <% for (let index = 1; index <= totalPages; index++) { %>
+    <a href="?page=<%= index %>" class="btn <%= currentPage === index ? 'active': '' %>">
+      <%= index %>
+    </a>
+    <% } %>
+
+    <!-- Next -->
+    <a
+      href="?page=<%= currentPage + 1 %>"
+      class="btn <%= currentPage === totalPages ? 'disabled' : '' %>"
+    >
+      Next
+    </a>
+  </div>
+  <% } %>
 </div>
 
 <%- include('../partials/footer.ejs') %>

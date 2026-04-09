@@ -112,3 +112,26 @@ form textarea {
     font-size: 12px;
   }
 }
+
+/* Pagination */
+.pagination {
+  margin-top: 20px;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.pagination .btn {
+  background: #e5e7eb;
+}
+
+.pagination .btn.active {
+  background: #6366f1;
+  color: white;
+}
+
+.pagination .btn.disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
