@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start:dev": "node --watch 6_request_prop_and_methods.js",
+    "start:dev": "node --watch 15_middleware.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
